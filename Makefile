@@ -14,7 +14,9 @@ NAME	=	Game_of_life
 
 INC			:=	./includes
 SRCS_DIR	:=	srcs
-SRCS		:=	main.cpp	 Cell.cpp	Grid.cpp
+SRCS		:=	main.cpp\
+				Cell.cpp	Grid.cpp	Renderer.cpp
+
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
 
 BUILD_DIR	:=	.build
@@ -39,9 +41,9 @@ RM			=	rm -rf
 ## ########################################################################## ##
 #   EXTERNAL LBIB															  ##
 ## ########################################################################## ##
-# SFML_DIR	source directory
-# SFML_INC	source includes
-# SFML_LIB	source lib.a and lib.so
+# SFML_DIR		source directory
+# SFML_INC		source includes
+# SFML_LIB		source lib.a and lib.so
 # SFML_FLAGS	compiler flafs
 
 SFML_DIR	:=	SFML-3.0.0

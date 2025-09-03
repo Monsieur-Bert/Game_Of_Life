@@ -1,5 +1,6 @@
 #include <gameOfLife.hpp>
 #include <Grid.hpp>
+#include <Renderer.hpp>
 
 void	debugPrint(Grid const &game)
 {
@@ -17,59 +18,28 @@ void	debugPrint(Grid const &game)
 }
 
 
-// int main() {
-// 	Grid game(40, 20);
-
-// 	// test add blinker
-// 	game.addCell(20,10);
-// 	game.addCell(21,10);
-// 	game.addCell(22,10);
-
-// 	for(int gen = 0; gen < 3; ++gen)
-// 	{
-// 		std::cout << "Generation " << gen << ":\n";
-// 		debugPrint(game);
-// 		game.iteration();
-// 	}
-
-// 	return 0;
-// }
-
-
 int main() {
-    const unsigned int cellSize = 10;
-    const unsigned int width = 1920 / cellSize;
-    const unsigned int height = 1080 / cellSize;
+	Grid game(G_WIGHT, G_HEIGHT);
 
-    Grid game(width, height);
-    game.addCell(10, 10);
-    game.addCell(11, 10);
-    game.addCell(12, 10);
+	// Cliper
+	// game.addCell(10, 10);
+	// game.addCell(10, 0);
+	// game.addCell(9, 10);
 
-    sf::RenderWindow window(sf::VideoMode(sf::Vector2u{W_WIDTH, W_HEIGHT}), "Game of Life - SFML 3");
-    window.setFramerateLimit(10);
+	// Glider
+	game.addCell(1,0);
+	game.addCell(2,1);
+	game.addCell(0,2);
+	game.addCell(1,2);
+	game.addCell(2,2);
 
-    sf::RectangleShape cellShape(sf::Vector2f{float(cellSize), float(cellSize)});
-    cellShape.setFillColor(sf::Color::Green);
+	Renderer renderer(W_WIDTH, W_HEIGHT, CELL_SIZE);
 
-    while (window.isOpen()) {
-        while (auto eventOpt = window.pollEvent()) {
-            // sf::Event event = *eventOpt;
-			// if (event.index() == sf::Event::Closed)
-			// 	window.close();
-        }
+	while (true) {
+		game.iteration();
+		renderer.render(game);
+		// debugPrint(game);
+	}
 
-        game.iteration();
-
-        window.clear(sf::Color::Black);
-        for (const Cell& c : game.getGrid()) {
-            cellShape.setPosition(sf::Vector2f{float(c.getX() * cellSize), float(c.getY() * cellSize)});
-            window.draw(cellShape);
-        }
-        window.display();
-    }
-
-    return 0;
+	return (0);
 }
-
-
