@@ -47,7 +47,8 @@ int	Cell::getY(void) const { return (_y);}
 // ************************************************************************** //
 
 /**
- * Look and stock statement of cell's neigbors
+ * Look at the cell's neigbors
+ * @return A vector containing all the neighbors of a cell, and their position.
  */
 std::vector<Cell>	Cell::neighbors() const
 {
