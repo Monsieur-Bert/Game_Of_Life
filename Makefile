@@ -14,7 +14,7 @@ NAME	=	Game_of_life
 
 INC			:=	./includes
 SRCS_DIR	:=	srcs
-SRCS		:=	main.cpp	 Cell.cpp	Conway.cpp
+SRCS		:=	main.cpp	 Cell.cpp	Grid.cpp
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
 
 BUILD_DIR	:=	.build

@@ -1,14 +1,14 @@
-#include <Conway.hpp>
+#include <Grid.hpp>
 
 // ************************************************************************** //
 //                            | Canonical Form  |                             //
 // ************************************************************************** //
 
 /*Default Constructor*/
-Conway::Conway() {}
+Grid::Grid() {}
 
 /*Copy Constructor*/
-Conway::Conway(Conway const &src)
+Grid::Grid(Grid const &src)
 {
 	_width = src._width;
 	_height = src._height;
@@ -16,10 +16,10 @@ Conway::Conway(Conway const &src)
 }
 
 /*Default Destructor*/
-Conway::~Conway() {}
+Grid::~Grid() {}
 
 /*Copy assignment operator*/
-Conway	&Conway::operator=(Conway const &rhs)
+Grid	&Grid::operator=(Grid const &rhs)
 {
 	if (this != &rhs)
 	{
@@ -35,22 +35,22 @@ Conway	&Conway::operator=(Conway const &rhs)
 //                        | Constructor Overloading |                         //
 // ************************************************************************** //
 
-Conway::Conway(int width, int height) : _width(width), _height(height) {}
+Grid::Grid(int width, int height) : _width(width), _height(height) {}
 
 // ************************************************************************** //
 //                           | Getters Members  |                             //
 // ************************************************************************** //
 
-int				Conway::getWidth() const { return (_width); }
-int				Conway::getHeight() const { return (_height); }
-const CellSet	&Conway::getGrid() const { return (_grid); }
+int				Grid::getWidth() const { return (_width); }
+int				Grid::getHeight() const { return (_height); }
+const CellSet	&Grid::getGrid() const { return (_grid); }
 
 
 // ************************************************************************** //
 //                            | Public Members |                              //
 // ************************************************************************** //
 
-void	Conway::addCell(int x, int y)
+void	Grid::addCell(int x, int y)
 {
 	_grid.insert(Cell(x, y));
 }
@@ -58,7 +58,7 @@ void	Conway::addCell(int x, int y)
 /**
  * Compute the next generation of Cells.
  */
-void	Conway::iteration()
+void	Grid::iteration()
 {
 	std::unordered_map<Cell, int, CellHash>	neighborCount;
 	for(const Cell& c : _grid) {

@@ -1,5 +1,5 @@
-#ifndef CONWAY_HPP
-# define CONWAY_HPP
+#ifndef Grid_HPP
+# define Grid_HPP
 
 #include <unordered_set>
 #include <unordered_map>
@@ -13,17 +13,17 @@ struct CellHash
 
 using CellSet = std::unordered_set<Cell, CellHash>;
 
-class Conway
+class Grid
 {
 	public:
 		/*Canonical Form*/
-		Conway(void);
-		Conway(Conway const &src);
-		~Conway(void);
-		Conway &operator=(Conway const &rhs);
+		Grid(void);
+		Grid(Grid const &src);
+		~Grid(void);
+		Grid &operator=(Grid const &rhs);
 
 		/*Constructor Overloading*/
-		Conway(int width, int height);
+		Grid(int width, int height);
 
 		/*Getters Members*/
 		int				getWidth() const;
@@ -40,4 +40,4 @@ class Conway
 		CellSet	_grid;
 };
 
-#endif // CONWAY_HPP
+#endif // Grid_HPP
