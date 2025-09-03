@@ -36,6 +36,19 @@ CPPFLAGS	=	-Wall -Wextra -Werror -std=c++17 -MMD -MP
 DIR_DUP		=	mkdir -p $(@D)
 RM			=	rm -rf
 
+## ########################################################################## ##
+#   EXTERNAL LBIB															  ##
+## ########################################################################## ##
+# SFML_DIR	source directory
+# SFML_INC	source includes
+# SFML_LIB	source lib.a and lib.so
+# SFML_FLAGS	compiler flafs
+
+SFML_DIR	:=	SFML-3.0.0
+SFML_INC	:=	$(SFML_DIR)/include
+SFML_LIB	:=	$(SFML_DIR)/lib
+SFML_FLAGS	:=	-lsfml-graphics -lsfml-window -lsfml-system
+
 # ########################################################################### ##
 #	ANSI_CODES																  ##
 ## ########################################################################## ##
@@ -82,15 +95,19 @@ endef
 
 all: $(NAME)
 
+run: $(NAME)
+	@echo "${GREEN}Launching $(NAME)...${RESET}"
+	@LD_LIBRARY_PATH=SFML-3.0.0/lib:$$LD_LIBRARY_PATH ./$(NAME)
+
 $(NAME): $(OBJS)
 	@printf "\n\n${BLUE}Linking objects into $(NAME)${RESET}\n"
-	@$(CPP) $(CPPFLAGS) $^ -o $@
+	@$(CPP) $(CPPFLAGS) $^ -o $@ -I$(SFML_INC) -L$(SFML_LIB) $(SFML_FLAGS)
 	@echo "${GREEN}Binary $(NAME) successfully created${RESET}"
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.cpp
 	@$(DIR_DUP)
 	$(PROGRESS_BAR)
-	@$(CPP) $(CPPFLAGS) -I$(INC) -o $@ -c $<
+	@$(CPP) $(CPPFLAGS) -I$(INC) -I$(SFML_INC) -o $@ -c $<
 
 clean:
 	@$(RM) $(BUILD_DIR)
@@ -102,6 +119,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re run
 
 -include $(DEPS)
