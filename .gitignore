@@ -1,0 +1,5 @@
+## Build folder containing .o and .d
+.build
+
+## Executable
+Game_of_life
