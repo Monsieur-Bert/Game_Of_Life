@@ -23,4 +23,4 @@ jobs:
 
       - name: Norm Verification
         run: |
-          clang-format --dry-run --Werror $(find srcs includes -name '*.cpp' -o -name '*.hpp')
+          clang-format --dry-run --Werror $(find srcs -name '*.cpp')

@@ -4,7 +4,6 @@ UseTab: Always
 ColumnLimit: 100
 BreakBeforeBraces: Allman
 AllowShortFunctionsOnASingleLine: Inline
-PointerAlignment: Right
 DerivePointerAlignment: false
 SpaceAfterCStyleCast: false
 SpacesInParentheses: false
