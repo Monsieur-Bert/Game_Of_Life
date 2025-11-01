@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    braches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Instal cppcheck and clang-format
+        run: |
+          sudo apt update
+          sudo apt install -y cppcheck clang-format
+
+      - name: Static Analysis
+        run: |
+          cppcheck --enable=all --std=c++17 srcs includes
+
+      - name: Norm Verification
+        run: |
+          clang-format --dry-run --Werror $(find srcs includes -name '*.cpp' -o -name '*.hpp')
