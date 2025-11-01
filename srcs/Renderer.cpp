@@ -4,39 +4,44 @@
 //                            | Canonical Form  |                             //
 // ************************************************************************** //
 
-/*Default Constructor*/
-Renderer::Renderer() {}
-
 /*Default Destructor*/
 Renderer::~Renderer() {}
+
 
 // ************************************************************************** //
 //                        | Constructor Overloading |                         //
 // ************************************************************************** //
 
-Renderer::Renderer(int windowWidth, int windowHeight, int cellSize)
-	: _window(sf::VideoMode(sf::Vector2u(windowWidth, windowHeight)), "Game of Life"),
-	_cellSize(cellSize)
-{
-	_window.setFramerateLimit(10);
-}
+Renderer::Renderer(int cellSize)
+	: _cellSize(cellSize),
+	_backgroundColor(sf::Color::White),
+	_cellColor(sf::Color::Black) {}
+
 
 // ************************************************************************** //
 //                            | Public Members  |                             //
 // ************************************************************************** //
 
-void	Renderer::render(Grid const &game)
+void	Renderer::render(sf::RenderWindow &window, Grid const &grid)
 {
-	sf::RectangleShape cellShape(sf::Vector2f{float(_cellSize), float(_cellSize)});
-	cellShape.setFillColor(sf::Color::Black);
+	window.clear(_backgroundColor);
+	drawCells(window, grid);
+	window.display();
+}
 
-	_window.clear(sf::Color::White);
-
-	for (const Cell& c : game.getGrid())
-	{
-		cellShape.setPosition(sf::Vector2f{float(c.getX() * _cellSize), float(c.getY() * _cellSize)}),
-		_window.draw(cellShape);
-	}
+void Renderer::drawCells(sf::RenderWindow &window, Grid const &grid)
+{
+	sf::RectangleShape cellShape(sf::Vector2f(
+		static_cast<float>(_cellSize),
+		static_cast<float>(_cellSize)));
+	cellShape.setFillColor(_cellColor);
 	
-	_window.display();
+	for (const Cell& cell : grid.getGrid())
+	{
+		float pixelX = static_cast<float>(cell.getX() * _cellSize);
+		float pixelY = static_cast<float>(cell.getY() * _cellSize);
+		
+		cellShape.setPosition(sf::Vector2f(pixelX, pixelY));
+		window.draw(cellShape);
+	}
 }

@@ -15,7 +15,7 @@ NAME	=	Game_of_life
 INC			:=	./includes
 SRCS_DIR	:=	srcs
 SRCS		:=	main.cpp\
-				Cell.cpp	Grid.cpp	Renderer.cpp
+				Cell.cpp	Grid.cpp	Renderer.cpp	Application.cpp
 
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
 
@@ -100,6 +100,11 @@ all: $(NAME)
 run: $(NAME)
 	@echo "${GREEN}Launching $(NAME)...${RESET}"
 	@LD_LIBRARY_PATH=SFML-3.0.0/lib:$$LD_LIBRARY_PATH ./$(NAME)
+
+run-valgrind: $(NAME)
+	@echo "${GREEN}Launching $(NAME) under Valgrind...${RESET}"
+	@LD_LIBRARY_PATH=SFML-3.0.0/lib:$$LD_LIBRARY_PATH \
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 $(NAME): $(OBJS)
 	@printf "\n\n${BLUE}Linking objects into $(NAME)${RESET}\n"

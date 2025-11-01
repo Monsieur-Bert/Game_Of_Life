@@ -61,14 +61,15 @@ void	Grid::addCell(int x, int y)
 void	Grid::iteration()
 {
 	std::unordered_map<Cell, int, CellHash>	neighborCount;
-	for(const Cell& c : _grid) {
-		for(const Cell& n : c.neighbors()) {
+	for(const Cell& c : _grid)
+	{
+		for(const Cell& n : c.neighbors())
 			neighborCount[n]++;
-		}
 	}
 
 	CellSet next;
-	for(const auto& [cell, count] : neighborCount) {
+	for(const auto& [cell, count] : neighborCount)
+	{
 		if(count == 3 || (count == 2 && _grid.count(cell)))
 			next.insert(cell);
 	}

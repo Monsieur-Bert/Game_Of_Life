@@ -1,28 +1,33 @@
 #ifndef RENDERER_HPP
 # define RENDERER_HPP
 
-# include <Grid.hpp>
 # include <SFML/Graphics.hpp>
+# include <Grid.hpp>
 
 class Renderer
 {
 	public:
 		/*Canonical Form*/
-		Renderer(void);
+		Renderer(void) = delete;
 		Renderer(Renderer const &src) = delete;
 		~Renderer(void);
 		Renderer &operator=(Renderer const &rhs) = delete;
 
 		/*Constructor Overloading*/
-		Renderer(int winWidth, int winHeight, int cellSize);
+		Renderer(int cellSize);
 
 		/*Public Members*/
-		void	render(Grid const &game);
+		void	render(sf::RenderWindow &window, Grid const &grid);
 
 	private:
-		sf::RenderWindow	_window;
-		int					_cellSize;
+		int			_cellSize;
+		
+		/*Colors*/
+		sf::Color	_backgroundColor;
+		sf::Color	_cellColor;
 
+		/*Drawing helpers*/
+		void	drawCells(sf::RenderWindow &window, Grid const &grid);
 };
 
 #endif // RENDERER_HPP

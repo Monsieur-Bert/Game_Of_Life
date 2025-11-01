@@ -1,45 +1,26 @@
-#include <gameOfLife.hpp>
-#include <Grid.hpp>
-#include <Renderer.hpp>
+#include "Application.hpp"
+#include <iostream>
+#include <exception>
 
-void	debugPrint(Grid const &game)
+// Constant Configuration
+constexpr int WINDOW_WIDTH = 800;
+constexpr int WINDOW_HEIGHT = 600;
+constexpr int CELL_SIZE = 10;
+constexpr int GRID_WIDTH = WINDOW_WIDTH / CELL_SIZE;
+constexpr int GRID_HEIGHT = WINDOW_HEIGHT / CELL_SIZE;
+
+int main()
 {
-	for (int y = 0; y < game.getHeight(); ++y)
+	try
 	{
-		for (int x = 0; x < game.getWidth(); ++x)
-		{
-			if (game.getGrid().count(Cell(x, y)))
-				std::cout << "0";
-			else
-				std::cout << ".";
-		}
-		std::cout << std::endl;
+		Application	app(WINDOW_WIDTH, WINDOW_HEIGHT, GRID_WIDTH, GRID_HEIGHT, CELL_SIZE);
+		app.run();
 	}
-}
-
-
-int main() {
-	Grid game(G_WIGHT, G_HEIGHT);
-
-	// Cliper
-	// game.addCell(10, 10);
-	// game.addCell(10, 0);
-	// game.addCell(9, 10);
-
-	// Glider
-	game.addCell(1,0);
-	game.addCell(2,1);
-	game.addCell(0,2);
-	game.addCell(1,2);
-	game.addCell(2,2);
-
-	Renderer renderer(W_WIDTH, W_HEIGHT, CELL_SIZE);
-
-	while (true) {
-		game.iteration();
-		renderer.render(game);
-		// debugPrint(game);
+	catch (const std::exception &e)
+	{
+		std::cerr << "Error: " << e.what() << std::endl;
+		return (1);
 	}
-
+	
 	return (0);
 }

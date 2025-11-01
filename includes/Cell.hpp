@@ -2,7 +2,6 @@
 # define Cell_HPP
 
 #include <vector>
-#include <gameOfLife.hpp>
 
 class Cell
 {

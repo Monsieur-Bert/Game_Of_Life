@@ -1,0 +1,12 @@
+{
+   ignore_nvidia_driver
+   Memcheck:Leak
+   ...
+   obj:*/libnvidia*
+}
+{
+   ignore_gl_driver
+   Memcheck:Leak
+   ...
+   obj:*/libGL*
+}
