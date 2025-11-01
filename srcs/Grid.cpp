@@ -41,9 +41,20 @@ Grid::Grid(int width, int height) : _width(width), _height(height) {}
 //                           | Getters Members  |                             //
 // ************************************************************************** //
 
-int				Grid::getWidth() const { return (_width); }
-int				Grid::getHeight() const { return (_height); }
-const CellSet	&Grid::getGrid() const { return (_grid); }
+int	Grid::getWidth() const
+{
+	return (_width);
+}
+
+int	Grid::getHeight() const
+{
+	return (_height);
+}
+
+const CellSet	&Grid::getGrid() const
+{
+	return (_grid);
+}
 
 
 // ************************************************************************** //

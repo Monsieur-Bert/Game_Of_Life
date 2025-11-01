@@ -15,7 +15,7 @@ class Cell
 		/*Constructor Overloading*/
 		Cell(int x, int y);
 
-		/*Getters Members*/
+		/*	Getters Members*/
 		int	getX(void) const;
 		int	getY(void) const;
 

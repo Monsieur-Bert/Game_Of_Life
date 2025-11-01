@@ -15,7 +15,9 @@ Renderer::~Renderer() {}
 Renderer::Renderer(int cellSize)
 	: _cellSize(cellSize),
 	_backgroundColor(sf::Color::White),
-	_cellColor(sf::Color::Black) {}
+	_cellColor(sf::Color::Black)
+{	
+}
 
 
 // ************************************************************************** //
